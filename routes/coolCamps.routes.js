@@ -11,7 +11,7 @@ router.get("/getAllRents", (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get("/getOneRent/:rent_id", (req, res) => {
+router.get("/rent/:rent_id", (req, res) => {
 
     const { rent_id } = req.params
 

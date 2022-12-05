@@ -13,7 +13,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'El password es requerido.']
     },
-    userName: {
+    username: {
       type: String,
       required: true
     },
