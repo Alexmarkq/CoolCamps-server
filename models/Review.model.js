@@ -3,10 +3,10 @@ const { Schema, model, default: mongoose } = require("mongoose");
 const reviewSchema = new Schema(
 
     {
-        // owner: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "User"
-        // },
+        owner: {
+            type: mongoose.Types.ObjectId,
+            ref: "User"
+        },
         title: {
             type: String,
             required: true
