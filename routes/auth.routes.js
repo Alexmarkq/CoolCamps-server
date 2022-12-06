@@ -8,8 +8,6 @@ const jwt = require('jsonwebtoken')
 
 const { isAuthenticated } = require('./../middleware/jwt.middleware')
 
-
-
 router.post('/signup', (req, res, next) => {
 
     const { email, password, username } = req.body
@@ -92,6 +90,7 @@ router.post('/login', (req, res, next) => {
 router.get('/verify', isAuthenticated, (req, res) => {
     res.status(200).json(req.payload)
 })
+
 
 
 module.exports = router

@@ -1,5 +1,6 @@
 const router = require("express").Router()
 
+const { isAuthenticated } = require("../middleware/jwt.middleware")
 const Rent = require("./../models/Rent.model")
 
 router.get("/getAllRents", (req, res) => {
