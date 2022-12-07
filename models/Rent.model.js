@@ -4,19 +4,21 @@ const rentSchema = new Schema(
     {
         title: {
             type: String,
-            required: true
+            required: [true, 'El nombre es obligatorio. ✏']
         },
         description: {
             type: String,
-            required: true
+            required: [true, 'La descripción es obligatoria. 📋'],
+            minlength: [15, 'La descripción debe tener min. 15 caracteres.']
         },
         price: {
             type: Number,
-            required: true
+            required: [true],
+            min: [1, 'El precio es obligatorio 💰']
         },
         imageUrl: {
             type: String,
-            required: true
+            required: [true, 'La imagen es obligatoria. 🌄']
         },
         location: {
             type: {

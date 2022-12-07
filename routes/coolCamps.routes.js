@@ -23,12 +23,12 @@ router.get("/rent/:rent_id", (req, res, next) => {
 })
 
 
-router.post("/saveRent", (req, res) => {
+router.post("/saveRent", (req, res, next) => {
 
     Rent
         .create(req.body)
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
 
