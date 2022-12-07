@@ -10,7 +10,7 @@ const { isAuthenticated } = require('./../middleware/jwt.middleware')
 
 router.post('/signup', (req, res, next) => {
 
-    const { email, password, username } = req.body
+    const { email, password, username, profileImg } = req.body
 
     if (password.length < 6) {
         res.status(400).json({ message: "El password no puede tener menos de 6 caracteres" })
@@ -29,11 +29,11 @@ router.post('/signup', (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPassword = bcrypt.hashSync(password, salt)
 
-            return User.create({ email, password: hashedPassword, username })
+            return User.create({ email, password: hashedPassword, username, profileImg })
         })
         .then((createdUser) => {
-            const { email, username, _id } = createdUser
-            const user = { email, username, _id }
+            const { email, username, _id, profileImg } = createdUser
+            const user = { email, username, _id, profileImg }
 
             res.status(201).json({ user })
         })
