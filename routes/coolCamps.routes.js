@@ -7,7 +7,8 @@ router.get("/getAllRents", (req, res) => {
 
     Rent
         .find()
-        .select({ title: 1, description: 1, imageUrl: 1 })
+        .populate("owner")
+        .select({ title: 1, description: 1, imageUrl: 1, owner: 1 })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -23,10 +24,10 @@ router.get("/rent/:rent_id", (req, res, next) => {
 })
 
 
-router.post("/saveRent", (req, res, next) => {
+router.post("/saveRent", isAuthenticated, (req, res, next) => {
 
     Rent
-        .create(req.body)
+        .create({ ...req.body, owner: req.payload._id })
         .then(response => res.json(response))
         .catch(err => next(err))
 })

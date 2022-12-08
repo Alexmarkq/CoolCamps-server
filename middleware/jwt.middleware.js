@@ -13,8 +13,6 @@ function getTokenFromHeaders(req) {
 
         const token = req.headers.authorization.split(" ")[1]
 
-        console.log('EXTRAYENDO DESDE EL MIDDLEWARE EL TOKEN ----- ', token)
-
         return token
     }
 

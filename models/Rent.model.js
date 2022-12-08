@@ -26,10 +26,10 @@ const rentSchema = new Schema(
             },
             coordinates: [Number]
         },
-        // owner: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "User"
-        // },
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
     },
     {
         timestamps: true
