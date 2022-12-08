@@ -1,46 +1,51 @@
 const router = require('express').Router()
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const User = require('../models/User.model')
-const saltRounds = 10
 
 const jwt = require('jsonwebtoken')
 
 const { isAuthenticated } = require('./../middleware/jwt.middleware')
 
+
 router.post('/signup', (req, res, next) => {
 
-    const { email, password, username, profileImg } = req.body
+    const { email, password, username } = req.body
 
-    if (password.length < 6) {
-        res.status(400).json({ message: "El password no puede tener menos de 6 caracteres" })
-        return
-    }
 
     User
-        .findOne({ email })
-        .then((foundUser) => {
 
-            if (foundUser) {
-                res.status(400).json({ message: "El usuario ya existe." })
-                return
-            }
-
-            const salt = bcrypt.genSaltSync(saltRounds)
-            const hashedPassword = bcrypt.hashSync(password, salt)
-
-            return User.create({ email, password: hashedPassword, username, profileImg })
-        })
+        .create({ email, password, username })
         .then((createdUser) => {
-            const { email, username, _id, profileImg } = createdUser
-            const user = { email, username, _id, profileImg }
+            const { email, username, _id } = createdUser
+            const user = { email, username, _id }
 
             res.status(201).json({ user })
         })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ message: "Internal Server Error" })
-        })
+        .catch(err => next(err))
+    // .findOne({ email })
+    // .then((foundUser) => {
+
+    //     if (foundUser) {
+    //         res.status(400).json({ message: "El usuario ya existe." })
+    //         return
+    //     }
+
+    //     const salt = bcrypt.genSaltSync(saltRounds)
+    //     const hashedPassword = bcrypt.hashSync(password, salt)
+
+    //     return User.create({ email, password: hashedPassword, username, profileImg })
+    // })
+    // .then((createdUser) => {
+    //     const { email, username, _id, profileImg } = createdUser
+    //     const user = { email, username, _id, profileImg }
+
+    //     res.status(201).json({ user })
+    // })
+    // .catch(err => {
+    //     console.log(err)
+    //     res.status(500).json({ message: "Internal Server Error" })
+    // })
 })
 
 
@@ -49,7 +54,7 @@ router.post('/login', (req, res, next) => {
     const { email, password } = req.body;
 
     if (email === '' || password === '') {
-        res.status(400).json({ message: "Proporciona un usuario y contraseña" });
+        res.status(400).json({ errorMessages: ["Proporciona un usuario y contraseña"] });
         return;
     }
 
@@ -58,7 +63,7 @@ router.post('/login', (req, res, next) => {
         .then((foundUser) => {
 
             if (!foundUser) {
-                res.status(401).json({ message: "Usuario no encontrado." })
+                res.status(401).json({ errorMessages: ["Usuario no encontrado"] });
                 return;
             }
 

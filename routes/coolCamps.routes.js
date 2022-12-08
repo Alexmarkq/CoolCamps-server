@@ -29,11 +29,16 @@ router.get("/rent/:rent_id", (req, res, next) => {
 
 
 router.post("/saveRent", isAuthenticated, (req, res, next) => {
-    // const {} = req.body
+
+    const { _id: owner } = req.payload
+
+    const { title, description, price, imageUrl, location } = req.body
+
     Rent
-        .create({ ...req.body, owner: req.payload._id })
+        .create({ title, description, price, imageUrl, location, owner })
         .then(response => res.json(response))
         .catch(err => next(err))
+
 })
 
 
