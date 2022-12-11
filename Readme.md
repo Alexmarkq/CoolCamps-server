@@ -21,12 +21,12 @@
 |   HTTP Method	|   URI path	                |  Description 	     |   JSON	|
 | -----------   | ----------------------------- | ------------------ |--------- |	  	
 | POST          | `/user/create`            	|  Create user       |      	|
+| GET	        | `/user/:user_id`          	|  User details	     |    ✅    | 
+| PUT	        | `/user/edit`	                |  Edit user         |    ✅    |     
 | DELETE	    | `/user/delete`	            |  Delete user	     |       	| 
-| PUT	        | `/user/profile/edit`	        |  Edit user profile |   	    |     
-| GET	        | `/user/:user_id`          	|  User details	     |    ✅   | 
-| POST	        | `/login`	                    |  User login	     |         |
-| GET	        | `/getAllRents`   	            |  Rent list         |    ✅   |   
-| GET     	    | `/rent/:rent_id`	            |  Rent details	     |    ✅   |
+| POST	        | `/login`	                    |  User login	     |          |
+| GET	        | `/getAllRents`   	            |  Rent list         |    ✅    |   
+| GET     	    | `/rent/:rent_id`	            |  Rent details	     |    ✅    |
 | PUT     	    | `/saveRent`   	            |  Save rent	     |     	    | 
 | PUT           | `/rent/edit/`	                |  Rent edit	     |          |    
 | DELETE        | `/rent/delete/`	            |  Rent delete	     |          |  

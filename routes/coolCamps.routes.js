@@ -56,6 +56,22 @@ router.get("/getOwnRents", isAuthenticated, (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.put("/rent/edit/:rent_id", isAuthenticated, (req, res, next) => {
+
+    const { rent_id } = req.params
+    const { title, description, price, imageUrl, lat, lng } = req.body
+
+    location = {
+        type: 'Point',
+        coordinates: [lat, lng]
+    },
+
+        Rent
+            .findByIdAndUpdate(rent_id, { title, description, price, imageUrl, location })
+            .then(response => res.json(response))
+            .catch(err => next(err))
+})
+
 module.exports = router
 
 
