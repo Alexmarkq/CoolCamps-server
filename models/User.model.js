@@ -20,7 +20,12 @@ const userSchema = new Schema(
     },
     profileImg: {
       type: String
-    }
+    },
+    favorites: [{
+      type: Schema.Types.ObjectId,
+      ref: "Rent"
+    }]
+
   },
   {
     timestamps: true

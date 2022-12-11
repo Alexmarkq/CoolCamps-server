@@ -28,8 +28,18 @@ router.post('/login', (req, res, next) => {
 
     const { email, password } = req.body;
 
-    if (email === '' || password === '') {
+    if (email === '' && password === '') {
         res.status(400).json({ errorMessages: ["Proporciona un usuario y contraseña"] });
+        return;
+    }
+
+    if (email === '') {
+        res.status(400).json({ errorMessages: ["Proporciona un usuario "] });
+        return;
+    }
+
+    if (password === '') {
+        res.status(400).json({ errorMessages: ["Proporciona una contraseña"] });
         return;
     }
 

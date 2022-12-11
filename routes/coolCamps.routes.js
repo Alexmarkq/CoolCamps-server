@@ -56,6 +56,42 @@ router.get("/getOwnRents", isAuthenticated, (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.get("/getOwnRents", isAuthenticated, (req, res, next) => {
+
+    const { _id: owner } = req.payload
+
+    Rent
+        .find({ owner })
+        .select({ title: 1, description: 1, imageUrl: 1, owner: 1 })
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+// router.get("/rent/:rent_id/getFavorites", isAuthenticated, (req, res, next) => {
+
+//     const { user_id } = req.params
+
+//     User
+//         .findById(user_id)
+//         .populate('favPlaces')
+//         .then(nomad => {
+//             res.render('user/fav', nomad)
+//         })
+
+//         .catch(err => console.log(err))
+
+// })
+
+// router.post('/:user_id/fav-places/:place_id', (req, res, next) => {
+
+//     const { user_id } = req.params
+//     const { place_id } = req.params
+
+//     User
+//         .findByIdAndUpdate(user_id, { "$addToSet": { "favPlaces": place_id } })
+//         .then(() => res.redirect('/explore/places'))
+// })
+
 module.exports = router
 
 
