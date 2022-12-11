@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const Rent = require("./../models/Rent.model")
+const User = require('./../models/User.model')
 
 const { isAuthenticated } = require("../middleware/jwt.middleware")
 
@@ -56,41 +57,35 @@ router.get("/getOwnRents", isAuthenticated, (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get("/getOwnRents", isAuthenticated, (req, res, next) => {
+router.post("/likeRent/:rent_id", isAuthenticated, (req, res, next) => {
 
-    const { _id: owner } = req.payload
+    const { rent_id } = req.params
 
-    Rent
-        .find({ owner })
-        .select({ title: 1, description: 1, imageUrl: 1, owner: 1 })
+    User
+        .findByIdAndUpdate(req.payload._id, { $addToSet: { favRent: rent_id } })
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
-// router.get("/rent/:rent_id/getFavorites", isAuthenticated, (req, res, next) => {
+router.post("/unlikeRent/:rent_id", isAuthenticated, (req, res, next) => {
 
-//     const { user_id } = req.params
+    const { rent_id } = req.params
 
-//     User
-//         .findById(user_id)
-//         .populate('favPlaces')
-//         .then(nomad => {
-//             res.render('user/fav', nomad)
-//         })
+    User
+        .findByIdAndUpdate(req.payload._id, { $pull: { favRent: rent_id } })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+})
 
-//         .catch(err => console.log(err))
+router.get("/getLikedRent", isAuthenticated, (req, res, next) => {
 
-// })
 
-// router.post('/:user_id/fav-places/:place_id', (req, res, next) => {
-
-//     const { user_id } = req.params
-//     const { place_id } = req.params
-
-//     User
-//         .findByIdAndUpdate(user_id, { "$addToSet": { "favPlaces": place_id } })
-//         .then(() => res.redirect('/explore/places'))
-// })
+    User
+        .findById(req.payload._id)
+        .populate('favRent')
+        .then(response => { res.json(response.favRent) })
+        .catch(err => next(err))
+})
 
 router.put("/rent/edit/:rent_id", isAuthenticated, (req, res, next) => {
 

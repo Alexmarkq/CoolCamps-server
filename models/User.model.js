@@ -21,7 +21,7 @@ const userSchema = new Schema(
     profileImg: {
       type: String
     },
-    favorites: [{
+    favRent: [{
       type: Schema.Types.ObjectId,
       ref: "Rent"
     }]
