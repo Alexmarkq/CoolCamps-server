@@ -1,106 +1,24 @@
 const router = require("express").Router()
-const Rent = require("./../models/Rent.model")
-const User = require('./../models/User.model')
 
 const { isAuthenticated } = require("../middleware/jwt.middleware")
+const { GetAllRents, RentDetails, SaveRent, GetOwnRents, LikeRent, UnlikedRent, GetLikeRent, RentEdit } = require("../controllers/coolCamps.controllers")
 
 
-router.get("/getAllRents", (req, res) => {
+router.get("/getAllRents", GetAllRents)
 
-    Rent
-        .find()
-        .populate("owner")
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
+router.get("/rent/:rent_id", RentDetails)
 
+router.post("/saveRent", isAuthenticated, SaveRent)
 
-router.get("/rent/:rent_id", (req, res, next) => {
+router.get("/getOwnRents", isAuthenticated, GetOwnRents)
 
-    const { rent_id } = req.params
+router.post("/likeRent/:rent_id", isAuthenticated, LikeRent)
 
-    Rent
-        .findById(rent_id)
-        .populate("owner")
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
+router.post("/unlikeRent/:rent_id", isAuthenticated, UnlikedRent)
 
+router.get("/getLikedRent", isAuthenticated, GetLikeRent)
 
-router.post("/saveRent", isAuthenticated, (req, res, next) => {
-
-    const { _id: owner } = req.payload
-
-    const { title, description, price, imageUrl, lat, lng } = req.body
-
-    location = {
-        type: 'Point',
-        coordinates: [lat, lng]
-    },
-
-        Rent
-            .create({ title, description, price, imageUrl, location, owner })
-            .then(response => res.json(response))
-            .catch(err => next(err))
-})
-
-
-router.get("/getOwnRents", isAuthenticated, (req, res, next) => {
-
-    const { _id: owner } = req.payload
-
-    Rent
-        .find({ owner })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
-
-router.post("/likeRent/:rent_id", isAuthenticated, (req, res, next) => {
-
-    const { rent_id } = req.params
-
-    User
-        .findByIdAndUpdate(req.payload._id, { $addToSet: { favRent: rent_id } })
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
-
-router.post("/unlikeRent/:rent_id", isAuthenticated, (req, res, next) => {
-
-    const { rent_id } = req.params
-
-    User
-        .findByIdAndUpdate(req.payload._id, { $pull: { favRent: rent_id } })
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
-
-router.get("/getLikedRent", isAuthenticated, (req, res, next) => {
-
-
-    User
-        .findById(req.payload._id)
-        .populate('favRent')
-        .then(response => { res.json(response.favRent) })
-        .catch(err => next(err))
-})
-
-router.put("/rent/edit/:rent_id", isAuthenticated, (req, res, next) => {
-
-    const { _id: owner } = req.payload
-    const { rent_id } = req.params
-    const { title, description, price, imageUrl, lat, lng, _id } = req.body
-
-    location = {
-        type: 'Point',
-        coordinates: [lat, lng]
-    },
-
-        Rent
-            .findByIdAndUpdate(rent_id, { title, description, price, imageUrl, location, owner, _id })
-            .then(response => res.json(response))
-            .catch(err => next(err))
-})
+router.put("/rent/edit/:rent_id", isAuthenticated, RentEdit)
 
 module.exports = router
 
