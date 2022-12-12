@@ -1,8 +1,9 @@
 const router = require("express").Router()
 const User = require("./../models/User.model")
 
-const Delete = (req, res, next) => {
+const userDelete = (req, res, next) => {
     const { user_id } = req.params
+    console.log(user_id)
 
     User
         .findByIdAndDelete(user_id)
@@ -11,4 +12,4 @@ const Delete = (req, res, next) => {
 
 }
 
-module.exports = { Delete }
+module.exports = { userDelete }

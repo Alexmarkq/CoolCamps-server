@@ -50,6 +50,16 @@ const GetOwnRents = (req, res, next) => {
         .catch(err => res.status(500).json(err))
 }
 
+const DeleteRent = (req, res, next) => {
+
+    const { rent_id: rent } = req.params
+
+    Rent
+        .findByIdAndDelete(rent)
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
 const LikeRent = (req, res, next) => {
 
     const { rent_id } = req.params
@@ -106,4 +116,5 @@ module.exports = {
     UnlikedRent,
     GetLikeRent,
     RentEdit,
+    DeleteRent
 }

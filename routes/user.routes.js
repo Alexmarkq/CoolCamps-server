@@ -1,7 +1,6 @@
 const router = require("express").Router()
-const User = require("./../models/User.model")
-const { Delete } = require('../controllers/user.controllers')
+const { userDelete } = require('../controllers/user.controllers')
 
-router.delete("/deleteUser/:user_id", Delete)
+router.delete("/userDelete/:user_id", userDelete)
 
 module.exports = router
