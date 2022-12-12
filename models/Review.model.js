@@ -14,7 +14,12 @@ const reviewSchema = new Schema(
         description: {
             type: String,
             required: true
-        }
+        },
+        rentReview: {
+            type: Schema.Types.ObjectId,
+            ref: "Rent"
+        },
+
     },
     {
         timestamps: true
