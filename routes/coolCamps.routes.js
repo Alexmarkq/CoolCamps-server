@@ -10,7 +10,6 @@ router.get("/getAllRents", (req, res) => {
     Rent
         .find()
         .populate("owner")
-        .select({ title: 1, description: 1, imageUrl: 1, owner: 1 })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -52,7 +51,6 @@ router.get("/getOwnRents", isAuthenticated, (req, res, next) => {
 
     Rent
         .find({ owner })
-        .select({ title: 1, description: 1, imageUrl: 1, owner: 1 })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -89,8 +87,9 @@ router.get("/getLikedRent", isAuthenticated, (req, res, next) => {
 
 router.put("/rent/edit/:rent_id", isAuthenticated, (req, res, next) => {
 
+    const { _id: owner } = req.payload
     const { rent_id } = req.params
-    const { title, description, price, imageUrl, lat, lng } = req.body
+    const { title, description, price, imageUrl, lat, lng, _id } = req.body
 
     location = {
         type: 'Point',
@@ -98,7 +97,7 @@ router.put("/rent/edit/:rent_id", isAuthenticated, (req, res, next) => {
     },
 
         Rent
-            .findByIdAndUpdate(rent_id, { title, description, price, imageUrl, location })
+            .findByIdAndUpdate(rent_id, { title, description, price, imageUrl, location, owner, _id })
             .then(response => res.json(response))
             .catch(err => next(err))
 })
