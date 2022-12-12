@@ -46,6 +46,7 @@ const GetOwnRents = (req, res, next) => {
 
     Rent
         .find({ owner })
+        .populate("owner")
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 }
@@ -85,7 +86,12 @@ const GetLikeRent = (req, res, next) => {
 
     User
         .findById(req.payload._id)
-        .populate('favRent')
+        .populate({
+            path: 'favRent',
+            populate: {
+                path: 'owner'
+            }
+        })
         .then(response => { res.json(response.favRent) })
         .catch(err => next(err))
 }
