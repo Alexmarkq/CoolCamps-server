@@ -8,7 +8,7 @@ const GetAllRents = (req, res) => {
     Rent
         .find()
         .populate("owner")
-        .populate({ path: 'review', populate: { path: 'owner' } })
+        // .populate({ path: 'review', populate: { path: 'owner' } })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 }
