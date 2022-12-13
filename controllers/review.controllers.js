@@ -1,3 +1,4 @@
+const { setRandomFallback } = require('bcryptjs')
 const express = require('express')
 
 const Review = require('../models/Review.model')
@@ -7,13 +8,28 @@ const router = express.Router()
 const createReview = (req, res, next) => {
     const { rent_id: rentReview } = req.params
     const { description, title } = req.body
-    const { _id: owner } = req.payload
+    const owner = req.payload._id
+
+
     Review
         .create({ description, title, rentReview, owner })
-        .then(response => res.json(response))
+        .then(reviews => {
+            res.json(reviews)
+        })
+        .catch(err => next(err))
+}
+
+const showReview = (req, res, next) => {
+    const { rent_id: rentReview } = req.params
+
+    Review
+        .find({ rentReview })
+        .then(reviews => {
+            res.json(reviews)
+        })
         .catch(err => next(err))
 }
 
 module.exports = {
-    createReview
+    createReview, showReview
 }

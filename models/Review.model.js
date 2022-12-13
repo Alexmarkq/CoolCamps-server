@@ -3,10 +3,6 @@ const { Schema, model, default: mongoose } = require("mongoose");
 const reviewSchema = new Schema(
 
     {
-        owner: {
-            type: mongoose.Types.ObjectId,
-            ref: "User"
-        },
         title: {
             type: String,
             required: true
@@ -18,6 +14,10 @@ const reviewSchema = new Schema(
         rentReview: {
             type: Schema.Types.ObjectId,
             ref: "Rent"
+        },
+        owner: {
+            type: mongoose.Types.ObjectId,
+            ref: "User"
         },
 
     },
