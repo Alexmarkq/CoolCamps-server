@@ -73,7 +73,7 @@ const Login = (req, res, next) => {
 }
 
 const Verify = (req, res) => {
-    console.log(req.payload)
+
     res.status(200).json(req.payload)
 }
 
