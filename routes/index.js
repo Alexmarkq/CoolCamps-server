@@ -11,7 +11,7 @@ module.exports = app => {
     const userRoutes = require("./user.routes")
     app.use("/api/user", userRoutes)
 
-    const reviewRoutes = require("./review.routes")
-    app.use("/api/review", reviewRoutes)
+    // const reviewRoutes = require("./review.routes")
+    // app.use("/api/review", reviewRoutes)
 
 }
