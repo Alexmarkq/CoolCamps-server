@@ -1,4 +1,3 @@
-const { setRandomFallback } = require('bcryptjs')
 const express = require('express')
 
 const Review = require('../models/Review.model')
