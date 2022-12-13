@@ -3,7 +3,6 @@ const User = require("./../models/User.model")
 
 const userDelete = (req, res, next) => {
     const { user_id } = req.params
-    console.log(user_id)
 
     User
         .findByIdAndDelete(user_id)
