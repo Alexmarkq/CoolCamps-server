@@ -26,6 +26,11 @@ const rentSchema = new Schema(
             },
             coordinates: [Number]
         },
+        city: {
+            type: String,
+            minlength: [true, 'La ciudad es obligatoria.']
+
+        },
         owner: {
             type: Schema.Types.ObjectId,
             ref: "User"

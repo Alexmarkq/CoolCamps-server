@@ -8,7 +8,6 @@ const GetAllRents = (req, res) => {
     Rent
         .find()
         .populate("owner")
-        // .populate({ path: 'review', populate: { path: 'owner' } })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 }
@@ -28,7 +27,7 @@ const SaveRent = (req, res, next) => {
 
     const { _id: owner } = req.payload
 
-    const { title, description, price, imageUrl, lat, lng } = req.body
+    const { title, description, price, imageUrl, lat, lng, city } = req.body
 
     location = {
         type: 'Point',
@@ -36,7 +35,7 @@ const SaveRent = (req, res, next) => {
     },
 
         Rent
-            .create({ title, description, price, imageUrl, location, owner })
+            .create({ title, description, price, imageUrl, location, owner, city })
             .then(response => res.json(response))
             .catch(err => next(err))
 }
@@ -101,7 +100,7 @@ const RentEdit = (req, res, next) => {
 
     const { _id: owner } = req.payload
     const { rent_id } = req.params
-    const { title, description, price, imageUrl, lat, lng, _id } = req.body
+    const { title, description, price, imageUrl, lat, lng, _id, city } = req.body
 
     location = {
         type: 'Point',
@@ -109,7 +108,7 @@ const RentEdit = (req, res, next) => {
     },
 
         Rent
-            .findByIdAndUpdate(rent_id, { title, description, price, imageUrl, location, owner, _id })
+            .findByIdAndUpdate(rent_id, { title, description, price, imageUrl, location, owner, _id, city })
             .then(response => res.json(response))
             .catch(err => next(err))
 }
