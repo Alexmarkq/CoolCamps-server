@@ -83,7 +83,6 @@ const UnlikedRent = (req, res, next) => {
 
 const GetLikeRent = (req, res, next) => {
 
-
     User
         .findById(req.payload._id)
         .populate({

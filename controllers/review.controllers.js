@@ -23,9 +23,8 @@ const showReview = (req, res, next) => {
 
     Review
         .find({ rentReview })
-        .then(reviews => {
-            res.json(reviews)
-        })
+        // .populate('owner')
+        .then(reviews => { res.json(reviews) })
         .catch(err => next(err))
 }
 

@@ -16,7 +16,7 @@ const reviewSchema = new Schema(
             ref: "Rent"
         },
         owner: {
-            type: mongoose.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "User"
         },
 
