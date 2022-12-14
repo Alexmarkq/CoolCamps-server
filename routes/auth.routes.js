@@ -7,7 +7,6 @@ const { SignUp, Login, Verify } = require('../controllers/auth.controllers')
 
 router.post('/signup', SignUp)
 
-
 router.post('/login', Login)
 
 router.get('/verify', isAuthenticated, Verify)
