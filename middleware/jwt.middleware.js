@@ -1,4 +1,4 @@
-var { expressjwt } = require("express-jwt");
+var { expressjwt } = require("express-jwt")
 
 const isAuthenticated = expressjwt({
     secret: process.env.TOKEN_SECRET,
@@ -15,7 +15,6 @@ function getTokenFromHeaders(req) {
 
         return token
     }
-
     return null
 }
 

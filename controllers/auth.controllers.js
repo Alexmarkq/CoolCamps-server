@@ -1,8 +1,8 @@
-const bcrypt = require('bcryptjs')
-
 const User = require('../models/User.model')
-
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
+
 
 const SignUp = (req, res, next) => {
 
@@ -21,20 +21,20 @@ const SignUp = (req, res, next) => {
 
 const Login = (req, res, next) => {
 
-    const { email, password } = req.body;
+    const { email, password } = req.body
 
     if (email === '' && password === '') {
-        res.status(400).json({ errorMessages: ["Proporciona un usuario y contraseña"] });
+        res.status(400).json({ errorMessages: ["Proporciona un usuario y contraseña"] })
         return;
     }
 
     if (email === '') {
-        res.status(400).json({ errorMessages: ["Proporciona un usuario "] });
+        res.status(400).json({ errorMessages: ["Proporciona un usuario "] })
         return;
     }
 
     if (password === '') {
-        res.status(400).json({ errorMessages: ["Proporciona una contraseña"] });
+        res.status(400).json({ errorMessages: ["Proporciona una contraseña"] })
         return;
     }
 
@@ -43,13 +43,13 @@ const Login = (req, res, next) => {
         .then((foundUser) => {
 
             if (!foundUser) {
-                res.status(401).json({ errorMessages: ["Usuario no encontrado"] });
+                res.status(401).json({ errorMessages: ["Usuario no encontrado"] })
                 return;
             }
 
             if (bcrypt.compareSync(password, foundUser.password)) {
 
-                const { _id, email, username, profileImg } = foundUser;
+                const { _id, email, username, profileImg } = foundUser
 
                 const payload = { _id, email, username, profileImg }
 
@@ -59,17 +59,17 @@ const Login = (req, res, next) => {
                     { algorithm: 'HS256', expiresIn: "6h" }
                 )
 
-                res.status(200).json({ authToken });
-            }
-            else {
-                res.status(401).json({ message: "No ha sido posible autentificar usuario." });
+                res.status(200).json({ authToken })
             }
 
+            else {
+                res.status(401).json({ message: "No ha sido posible autentificar usuario." })
+            }
         })
         .catch(err => {
             console.log(err)
             res.status(500).json({ message: "Internal Server Error" })
-        });
+        })
 }
 
 const Verify = (req, res) => {

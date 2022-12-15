@@ -1,6 +1,8 @@
 const router = require("express").Router()
 const User = require("./../models/User.model")
 
+
+
 const userDelete = (req, res, next) => {
     const { user_id } = req.params
 

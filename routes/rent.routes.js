@@ -1,8 +1,8 @@
 const router = require("express").Router()
 
 const { isAuthenticated } = require("../middleware/jwt.middleware")
-const { GetAllRents, RentDetails, SaveRent, GetOwnRents, LikeRent, UnlikedRent, GetLikeRent, RentEdit, DeleteRent } = require("../controllers/coolCamps.controllers")
-
+const { GetAllRents, RentDetails, SaveRent, GetOwnRents, LikeRent,
+    UnlikedRent, GetLikeRent, RentEdit, DeleteRent, Enable, Disable } = require("../controllers/rent.controllers")
 
 router.get("/getAllRents", GetAllRents)
 
@@ -21,6 +21,14 @@ router.post("/unlikeRent/:rent_id", isAuthenticated, UnlikedRent)
 router.get("/getLikedRent", isAuthenticated, GetLikeRent)
 
 router.put("/rent/edit/:rent_id", isAuthenticated, RentEdit)
+
+router.post("/enable/:rent_id", isAuthenticated, Enable)
+
+router.post("/disable/:rent_id", isAuthenticated, Disable)
+
+
+
+
 
 module.exports = router
 

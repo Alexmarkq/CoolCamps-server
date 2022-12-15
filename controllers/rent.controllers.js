@@ -1,6 +1,7 @@
 const router = require("express").Router()
-const Rent = require("./../models/Rent.model")
-const User = require('./../models/User.model')
+const Rent = require("../models/Rent.model")
+const User = require('../models/User.model')
+
 
 
 const GetAllRents = (req, res) => {
@@ -112,6 +113,27 @@ const RentEdit = (req, res, next) => {
             .catch(err => next(err))
 }
 
+const Enable = (req, res, next) => {
+
+    const { rent_id } = req.params
+
+    Rent
+        .findByIdAndUpdate(rent_id, { state: 'Enable' })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+const Disable = (req, res, next) => {
+
+    const { rent_id } = req.params
+
+    Rent
+        .findByIdAndUpdate(rent_id, { state: 'Disable' })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+
 module.exports = {
     GetAllRents,
     RentDetails,
@@ -121,5 +143,7 @@ module.exports = {
     UnlikedRent,
     GetLikeRent,
     RentEdit,
-    DeleteRent
+    DeleteRent,
+    Enable,
+    Disable,
 }

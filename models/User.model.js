@@ -1,7 +1,10 @@
 const { Schema, model } = require("mongoose")
 const bcrypt = require('bcryptjs')
 
+
+
 const userSchema = new Schema(
+
   {
     email: {
       type: String,
@@ -42,6 +45,6 @@ userSchema.pre('save', function (next) {
   next()
 })
 
-const User = model("User", userSchema);
+const User = model("User", userSchema)
 
-module.exports = User;
+module.exports = User

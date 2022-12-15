@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose")
 
+
 const rentSchema = new Schema(
     {
         title: {
@@ -33,6 +34,11 @@ const rentSchema = new Schema(
         owner: {
             type: Schema.Types.ObjectId,
             ref: "User"
+        },
+        state: {
+            type: String,
+            enum: ['Enable', 'Disable'],
+            defaul: 'Enable'
         }
     },
     {

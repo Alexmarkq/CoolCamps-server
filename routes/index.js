@@ -1,6 +1,6 @@
 module.exports = app => {
-    const coolCampsRoutes = require("./coolCamps.routes")
-    app.use("/api/coolCamps", coolCampsRoutes)
+    const rentRoutes = require("./rent.routes")
+    app.use("/api/coolCamps", rentRoutes)
 
     const authRoutes = require("./auth.routes")
     app.use("/api/auth", authRoutes)
