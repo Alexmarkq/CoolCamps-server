@@ -1,3 +1,6 @@
+# You can find a live version here ---> https://coolcamps.netlify.app/
+
+
 ## Client Routes
 
 |   	    |   URI path	                |  Description  	 |   PROTECTED  |
@@ -7,7 +10,6 @@
 |         	| `/iniciar-sesion`             |  Log In 	         |         |   	
 | 	        | `/cerrar-sesion`	            |  Log Out           |   ✅    |   	 
 |       	| `/perfil`         	        |  User Profile 	 |   ✅    |  
-|           | `/perfil/editar`             	|  Edit User Profile |   ✅    |  	
 |	        | `/lista`	                    |  Rent list 	     |   	   | 
 |	        | `/anuncio/crear`         	    |  Create Rent	     |   ✅    |	   
 |	        | `/detalles/:rent_id`  	    |  Rent Details 	 |   	   |   
@@ -20,11 +22,11 @@
 
 |   HTTP Method	|   URI path	                |  Description 	     |   JSON	|
 | -----------   | ----------------------------- | ------------------ |--------- |	  	
-| POST          | `/user/create`            	|  Create user       |      	|
-| GET	        | `/user/:user_id`          	|  User details	     |    ✅    | 
-| PUT	        | `/user/edit`	                |  Edit user         |    ✅    |     
-| DELETE	    | `/user/delete`	            |  Delete user	     |       	| 
+| POST          | `/signup`                 	|  Create user       |      	|
 | POST	        | `/login`	                    |  User login	     |          |
+| PUT	        | `/profile/edit`	            |  Edit user profile |   	    |    
+| DELETE	    | `/user/delete`	            |  Delete user	     |       	|  
+| GET	        | `/user/:user_id`          	|  User details	     |    ✅    | 
 | GET	        | `/getAllRents`   	            |  Rent list         |    ✅    |   
 | GET     	    | `/rent/:rent_id`	            |  Rent details	     |    ✅    |
 | PUT     	    | `/saveRent`   	            |  Save rent	     |     	    | 
@@ -32,7 +34,6 @@
 | DELETE        | `/rent/delete/`	            |  Rent delete	     |          |  
 | POST        	| `/rent/create`	            |  Rent form 	     |   	    | 
 | POST	        | `/post/create`	            |  Post form 	     |      	| 
-| PUT	        | `/post/edit`	                |  Post form 	     |      	| 
 | DELETE	    | `/post/delete`	            |  Delete Post       |      	| 
  
 
