@@ -28,8 +28,6 @@ router.post("/disable/:rent_id", isAuthenticated, Disable)
 
 
 
-
-
 module.exports = router
 
 
