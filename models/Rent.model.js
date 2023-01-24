@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose")
 
 
+
 const rentSchema = new Schema(
     {
         title: {
