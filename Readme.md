@@ -23,7 +23,7 @@
 |   HTTP Method	|   URI path	                |  Description 	     |   JSON	|
 | -----------   | ----------------------------- | ------------------ |--------- |	  	
 | POST          | `/signup`                 	|  Create user       |      	|
-| POST	        | `/login`	                    |  User login	     |          |
+| POST	         | `/login`	                    |  User login	     |          |
 | PUT	        | `/profile/edit`	            |  Edit user profile |   	    |    
 | DELETE	    | `/user/delete`	            |  Delete user	     |       	|  
 | GET	        | `/user/:user_id`          	|  User details	     |    ✅    | 
