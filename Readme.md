@@ -1,7 +1,6 @@
 ## Live version here ---> https://coolcamps.netlify.app/
 
 
-
 ## Client Routes
 
 |   	       |   URI path	                |  Description  	    |   PROTECTED  |
