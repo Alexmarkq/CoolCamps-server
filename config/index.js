@@ -13,7 +13,7 @@ const cookieParser = require("cookie-parser");
 // unless the request if from the same domain, by default express wont accept POST requests
 const cors = require("cors");
 
-const FRONTEND_URL = process.env.ORIGIN ||"https://coolcamps.vercel.app" || "https://coolcamps.netlify.app" || "http://localhost:3000";
+const FRONTEND_URL = process.env.ORIGIN || "http://localhost:3000";
 
 // Middleware configuration
 module.exports = (app) => {
@@ -28,14 +28,6 @@ module.exports = (app) => {
       credentials: true
     })
   );
-
-  app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", FRONTEND_URL);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-  });
 
   // In development environment the app logs
   app.use(logger("dev"));
