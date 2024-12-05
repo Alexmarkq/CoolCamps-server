@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for coolcamps-server on 2024-12-05T19:33:58+01:00
+# fly.toml app configuration file generated for coolcamps-server on 2024-12-05T19:52:28+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -17,6 +17,6 @@ primary_region = 'mad'
   processes = ['app']
 
 [[vm]]
-  memory = '512mb'
+  memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
